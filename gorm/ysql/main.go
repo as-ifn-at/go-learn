@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	postgres "github.com/yugabyte/gorm-yugabytedb"
+	"gorm.io/gorm"
 )
 
 const (
@@ -23,13 +24,13 @@ type Employee struct {
 }
 
 func main() {
-	
-	
-	
+
 	conn := fmt.Sprintf("host= %s port = %d user = %s password = %s dbname = %s sslmode=disable", host, port, user, password, dbname)
 	var err error
-	db, err := gorm.Open("postgres", conn)
-	defer db.Close()
+	db, err := gorm.Open(postgres.Open(conn), &gorm.Config{
+		// Logger: logger.Default.LogMode(logger.Info),
+	})
+	// defer db.Close()
 	if err != nil {
 		panic(err)
 	}
