@@ -32,6 +32,7 @@ func main() {
 	// db, err := gorm.Open(postgres.Open(url), &gorm.Config{
 	// 	Logger: logger.Default.LogMode(logger.Info),
 	// })
+	fmt.Printf("url: %v\n", url)
 	db, err := gorm.Open(postgres.Open(url), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
